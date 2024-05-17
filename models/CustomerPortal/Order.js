@@ -6,9 +6,17 @@ const OrderSchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     required: true,
   },
-  userId: {
+  placedUserId: {
     type: Schema.Types.ObjectId,
     required: true,
+  },
+  quantity: {
+    type: Number,
+    required: true,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
   },
 });
 

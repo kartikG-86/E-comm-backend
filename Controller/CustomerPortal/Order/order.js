@@ -2,8 +2,7 @@ const Order = require("../../../models/CustomerPortal/Order");
 const Product = require("../../../models/Product");
 
 const findOrders = async (userId) => {
-  const orders = await Order.find({ userId: userId });
-  //   console.log("Your Orders", orders);
+  const orders = await Order.find({ placedUserId: userId });
   return orders;
 };
 
@@ -11,6 +10,7 @@ const orderProductDetails = async (productId) => {
   const product = await Product.findOne({ _id: productId });
   return product;
 };
+
 const getOrders = async (req, res) => {
   const userId = req.params.userId;
 
@@ -28,12 +28,15 @@ const getOrders = async (req, res) => {
 
   for (const item of userOrders) {
     let orderProduct = await orderProductDetails(item.productId);
-    orderProduct = { ...orderProduct._doc, orderId: item._id }; // Spread existing keys and add new key
-    console.log(orderProduct);
+    orderProduct = {
+      ...orderProduct._doc,
+      orderId: item._id,
+      placedDate: item.date,
+      quantity: item.quantity,
+    }; // Spread existing keys and add new key
     orders.push(orderProduct);
   }
 
-  console.log("Final Orders", orders);
   return res.send({
     orders: orders,
     status: 200,

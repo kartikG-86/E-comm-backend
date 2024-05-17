@@ -2,6 +2,8 @@ const User = require("../../../models/CustomerPortal/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+const secretKey = "Kartikisagood$osdafasdY";
+
 const findUser = async (email) => {
   const user = await User.findOne({ email: email });
   return user;
@@ -19,10 +21,10 @@ const hashPassword = async (password) => {
   return secPass;
 };
 
-const getAuthToken = async (user) => {
+const getAuthToken = async (id) => {
   const data = {
     user: {
-      id: user.id,
+      id: id,
     },
   };
 
@@ -73,7 +75,11 @@ const forgotPassword = async (req, res) => {
     { $set: { password: hashedPassword } }
   );
 
+  console.log(user);
+  const authToken = await getAuthToken(id);
+  console.log(authToken);
   return res.send({
+    token: authToken,
     message: "Password Updated Successfully",
     status: 200,
     success: true,
