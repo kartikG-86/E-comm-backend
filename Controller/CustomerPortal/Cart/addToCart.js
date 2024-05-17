@@ -22,14 +22,14 @@ const findProduct = async (productId, userId) => {
 };
 
 const addToCart = async (req, res) => {
-  const { productId, userId } = req.body;
+  const { productId, userId, quantity } = req.body;
 
   var cartProduct = await findProduct(productId, userId);
 
   if (cartProduct) {
     cartProduct = await Cart.updateOne(
       { _id: cartProduct.id },
-      { $set: { quantity: cartProduct.quantity + 1 } }
+      { $set: { quantity: cartProduct.quantity + Number(quantity) } }
     );
     return res.send({
       status: 200,
@@ -41,6 +41,7 @@ const addToCart = async (req, res) => {
   const cartItem = await Cart.create({
     productId: productId,
     userId: userId,
+    quantity: Number(quantity),
   });
 
   const token = await getAuthToken(cartItem);

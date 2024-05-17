@@ -14,12 +14,17 @@ const findCartProducts = async (userId) => {
         console.log("Your Item", item);
         const getProduct = await Product.findById(item.productId); // Assuming Product.findById() is correct
         if (getProduct) {
-          getProduct.quantity = item.quantity;
-          cartProducts.push(getProduct);
+          // console.log(item.quantity);
+          let cartProduct = { ...getProduct.toObject() };
+          cartProduct.quantity = item.quantity;
+          cartProduct.cartId = item._id;
+          console.log("Your cart Quantity", cartProduct.quantity);
+          cartProducts.push(cartProduct);
         }
       })
     );
   }
+  console.log("Your Finnal Cart Product", cartProducts);
 
   return cartProducts;
 };
@@ -28,7 +33,7 @@ const getCartProducts = async (req, res) => {
   const userId = req.params.userId;
   console.log(userId);
   const cartItems = await findCartProducts(userId);
-  console.log("cart Items", cartItems);
+  // console.log("cart Items", cartItems);
   res.json(cartItems);
 };
 

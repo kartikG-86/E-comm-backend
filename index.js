@@ -23,6 +23,8 @@ app.use("/api/auth", require("./routes/CustomerPortal/auth"));
 app.use("/api/products", require("./routes/CustomerPortal/products"));
 app.use("/api/cart", require("./routes/CustomerPortal/cart"));
 
+app.use("/api/orders", require("./routes/CustomerPortal/order"));
+
 // admin Portal
 app.use("/api/auth/admin", require("./routes/AdminPortal/adminAuth"));
 app.use(
