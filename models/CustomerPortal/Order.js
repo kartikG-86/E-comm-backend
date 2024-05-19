@@ -14,6 +14,33 @@ const OrderSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  title: {
+    type: String,
+    required: true,
+  },
+  imgUrl: {
+    type: String,
+    required: true,
+  },
+  category: {
+    type: String,
+    requierd: true,
+  },
+  originalPrice: {
+    type: Number,
+    required: true,
+  },
+  finalPrice: {
+    type: Number,
+  },
+  gender: {
+    type: String,
+    requierd: true,
+  },
+  brandName: {
+    type: String,
+    required: true,
+  },
   date: {
     type: Date,
     default: Date.now,

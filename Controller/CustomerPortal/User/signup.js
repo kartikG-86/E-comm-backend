@@ -20,11 +20,11 @@ const getAuthToken = async (user) => {
   return authToken;
 };
 
-const createNewUser = async (name, email, password) => {
+const createNewUser = async (userName, email, password) => {
   const salt = await bcrypt.genSalt(10);
   const secPass = await bcrypt.hash(password, salt);
   const newUser = await User.create({
-    name: name,
+    userName: userName,
     email: email,
     password: secPass,
   });
@@ -34,7 +34,7 @@ const createNewUser = async (name, email, password) => {
 
 const signUp = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { userName, email, password } = req.body;
     const user = await findUser(email);
 
     if (user) {
@@ -46,7 +46,7 @@ const signUp = async (req, res) => {
       });
     }
 
-    const newUser = await createNewUser(name, email, password);
+    const newUser = await createNewUser(userName, email, password);
     const authToken = await getAuthToken(newUser);
 
     return res.json({

@@ -3,6 +3,8 @@ const router = express.Router();
 const login = require("../../Controller/CustomerPortal/User/login");
 const signUp = require("../../Controller/CustomerPortal/User/signup");
 const forgotPassword = require("../../Controller/CustomerPortal/User/forgotPassword");
+const getUser = require("../../Controller/CustomerPortal/User/getUserDetails");
+const add_more_user_details = require("../../Controller/CustomerPortal/User/User_more_details");
 
 // Sign UP
 router.post("/signUp", async (req, res) => {
@@ -17,6 +19,14 @@ router.post("/login", async (req, res) => {
 //forgotPassword
 router.post("/forgotPassword", async (req, res) => {
   await forgotPassword(req, res);
+});
+
+router.get("/user/:userId", async (req, res) => {
+  await getUser(req, res);
+});
+
+router.post("/add_user_details", async (req, res) => {
+  await add_more_user_details(req, res);
 });
 
 module.exports = router;
