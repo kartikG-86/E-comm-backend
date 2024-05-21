@@ -27,14 +27,14 @@ const getOrders = async (req, res) => {
   }
 
   for (const item of userOrders) {
-    let orderProduct = await orderProductDetails(item.productId);
-    orderProduct = {
-      ...orderProduct._doc,
-      orderId: item._id,
-      placedDate: item.date,
-      quantity: item.quantity,
-    }; // Spread existing keys and add new key
-    orders.push(orderProduct);
+    // let orderProduct = await orderProductDetails(item.productId);
+    // orderProduct = {
+    //   ...orderProduct._doc,
+    //   orderId: item._id,
+    //   placedDate: item.date,
+    //   quantity: item.quantity,
+    // }; // Spread existing keys and add new key
+    orders.push(item);
   }
 
   return res.send({

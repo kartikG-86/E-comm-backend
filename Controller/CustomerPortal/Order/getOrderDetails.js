@@ -15,15 +15,9 @@ const getOrderDetails = async (req, res) => {
   const orderId = await req.params.orderId;
   console.log(orderId);
   const order = await findOrder(orderId);
-  const product = await findProduct(order.productId);
 
-  let orderDetails = {
-    ...product._doc,
-    quantity: order.quantity,
-    orderId: order._id,
-  };
   return res.send({
-    orderDetails: orderDetails,
+    orderDetails: order,
   });
 };
 

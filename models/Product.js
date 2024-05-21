@@ -37,6 +37,22 @@ const ProductSchema = new Schema({
     type: Schema.Types.ObjectId,
     required: true,
   },
+  senderAddress: {
+    type: String,
+    required: true,
+  },
+  senderCity: {
+    type: String,
+    required: true,
+  },
+  senderCountry: {
+    type: String,
+    required: true,
+  },
+  estimatedDelivery: {
+    type: Number,
+    required: true,
+  },
 });
 
 const Product = mongoose.model("product", ProductSchema);

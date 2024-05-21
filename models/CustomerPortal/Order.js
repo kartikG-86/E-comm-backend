@@ -41,9 +41,69 @@ const OrderSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  date: {
+  userName: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  phoneNumber: {
+    type: String,
+    required: true,
+  },
+  phoneCode: {
+    type: String,
+    required: true,
+  },
+  shippingAddress: {
+    type: String,
+    required: true,
+  },
+  shippingStatus: {
+    type: String,
+    required: true,
+  },
+  senderAddress: {
+    type: String,
+    required: true,
+  },
+  updatedDate: {
     type: Date,
     default: Date.now,
+  },
+  senderUserId: {
+    type: Schema.Types.ObjectId,
+    required: true,
+  },
+  placedDate: {
+    type: Date,
+    default: Date.now,
+  },
+  estimatedDeliveryDate: {
+    type: Number,
+    required: true,
+  },
+  senderCity: {
+    type: String,
+    required: true,
+  },
+  senderCountry: {
+    type: String,
+    required: true,
+  },
+  shippingCity: {
+    type: String,
+    required: true,
+  },
+  shippingCountry: {
+    type: String,
+    required: true,
+  },
+  orderId: {
+    type: String,
+    required: true,
   },
 });
 
