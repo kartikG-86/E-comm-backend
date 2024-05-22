@@ -1,8 +1,8 @@
 const User = require("../../../models/CustomerPortal/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
-const secretKey = "Kartikisagood$osdafasdY";
+require("dotenv").config();
+const secretKey = process.env.SECRET_KEY;
 
 const findUser = async (email) => {
   const user = await User.findOne({ email: email });
@@ -17,7 +17,6 @@ const comparePasswords = async (newPassword, user) => {
 const hashPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
   const secPass = await bcrypt.hash(password, salt);
-  console.log(secPass);
   return secPass;
 };
 
@@ -34,7 +33,6 @@ const getAuthToken = async (id) => {
 
 const forgotPassword = async (req, res) => {
   const { email, newPassword, confirmPassword } = req.body;
-  console.log(email, newPassword, confirmPassword);
 
   // compare new Password and Confirm Password
   if (newPassword != confirmPassword) {
@@ -75,9 +73,7 @@ const forgotPassword = async (req, res) => {
     { $set: { password: hashedPassword } }
   );
 
-  console.log(user);
   const authToken = await getAuthToken(id);
-  console.log(authToken);
   return res.send({
     token: authToken,
     message: "Password Updated Successfully",

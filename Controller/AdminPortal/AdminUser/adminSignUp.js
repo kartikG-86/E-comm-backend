@@ -1,8 +1,8 @@
 const bcrypt = require("bcryptjs");
 const AdminUser = require("../../../models/AdminPortal/AdminUser");
 const jwt = require("jsonwebtoken");
-
-const secretKey = "Kartikisagood$oY";
+require("dotenv").config();
+const secretKey = process.env.SECRET_KEY;
 
 const findUser = async (email) => {
   const user = await AdminUser.findOne({ email: email });
@@ -39,7 +39,6 @@ const signUp = async (req, res) => {
     const user = await findUser(email);
 
     if (user) {
-      console.log("User already there");
       return res.json({
         error: "User Already exist",
         status: "400",

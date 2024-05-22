@@ -12,7 +12,6 @@ const findUser = async (userId) => {
 };
 const newOrder = async (req, res) => {
   const { orders, address } = req.body;
-  console.log(address);
   let userId = "";
 
   let database_orders = await Order.find();

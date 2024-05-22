@@ -1,9 +1,10 @@
 const AdminUser = require("../../../models/AdminPortal/AdminUser");
 const Product = require("../../../models/Product");
 var jwt = require("jsonwebtoken");
+require("dotenv").config();
 const getProducts = require("../../CustomerPortal/Products/getProducts");
 
-const Secret_Key = "KartikGoyalisagood$oy$$";
+const Secret_Key = process.env.SECRET_KEY;
 
 const getAdminUser = async (email) => {
   const user = await AdminUser.findOne({ email: email });
@@ -90,7 +91,6 @@ const addProduct = async (req, res) => {
     admin_user
   );
 
-  // console.log(newProduct);
   const token = await getAuthToken(newProduct);
   return res.send({
     token: token,

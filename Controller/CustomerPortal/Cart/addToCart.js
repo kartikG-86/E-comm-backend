@@ -1,7 +1,7 @@
 const Cart = require("../../../models/CustomerPortal/Cart");
 var jwt = require("jsonwebtoken");
-
-const Secret_Key = "KartikGoyalisagood$oy$sdaf$";
+require("dotenv").config();
+const Secret_Key = process.env.SECRET_KEY;
 
 const getAuthToken = async (cartItem) => {
   const data = {

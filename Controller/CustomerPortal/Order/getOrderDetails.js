@@ -13,7 +13,6 @@ const findProduct = async (productId) => {
 
 const getOrderDetails = async (req, res) => {
   const orderId = await req.params.orderId;
-  console.log(orderId);
   const order = await findOrder(orderId);
 
   return res.send({

@@ -15,24 +15,22 @@ const comparePasswords = async (newPassword, user) => {
 const hashPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
   const secPass = await bcrypt.hash(password, salt);
-  console.log(secPass);
   return secPass;
 };
 
-const getAuthToken = async (user) => {
-  const data = {
-    user: {
-      id: user.id,
-    },
-  };
+// const getAuthToken = async (user) => {
+//   const data = {
+//     user: {
+//       id: user.id,
+//     },
+//   };
 
-  const authToken = jwt.sign(data, secretKey);
-  return authToken;
-};
+//   const authToken = jwt.sign(data, secretKey);
+//   return authToken;
+// };
 
 const forgotPassword = async (req, res) => {
   const { email, newPassword, confirmPassword } = req.body;
-  console.log(email, newPassword, confirmPassword);
 
   // compare new Password and Confirm Password
   if (newPassword != confirmPassword) {

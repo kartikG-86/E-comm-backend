@@ -53,7 +53,6 @@ const add_more_user_details = async (req, res) => {
   //   }
   // );
 
-  console.log(user);
   user.addresses.push(addressDetails);
   user.save();
 

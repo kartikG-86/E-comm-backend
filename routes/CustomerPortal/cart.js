@@ -12,12 +12,10 @@ router.post("/add_to_cart", async (req, res) => {
 });
 
 router.get("/cart_products/:userId", async (req, res) => {
-  console.log(req.params.userId);
   await getCartProducts(req, res);
 });
 
 router.delete("/delete_cart_product/:cartId", async (req, res) => {
-  console.log("Cart Id", req.params.cartId);
   await deleteItem(req, res);
 });
 

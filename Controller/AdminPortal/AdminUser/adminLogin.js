@@ -1,8 +1,8 @@
 const AdminUser = require("../../../models/AdminPortal/AdminUser");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
-const secretKey = "Kartikisagood$oY";
+require("dotenv").config();
+const secretKey = process.env.SECRET_KEY;
 
 const findUser = async (email) => {
   const user = await AdminUser.findOne({ email: email });
@@ -27,7 +27,6 @@ const getAuthToken = async (user) => {
 
 const login = async (req, res) => {
   try {
-    console.log(req.body);
     const { email, password } = req.body;
     const user = await findUser(email);
     if (!user) {

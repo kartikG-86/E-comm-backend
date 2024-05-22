@@ -6,10 +6,10 @@ const findOrders = async (userId) => {
   return orders;
 };
 
-const orderProductDetails = async (productId) => {
-  const product = await Product.findOne({ _id: productId });
-  return product;
-};
+// const orderProductDetails = async (productId) => {
+//   const product = await Product.findOne({ _id: productId });
+//   return product;
+// };
 
 const getOrders = async (req, res) => {
   const userId = req.params.userId;
