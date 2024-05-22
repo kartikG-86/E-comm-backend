@@ -3,6 +3,7 @@ const getProducts = require("../../Controller/CustomerPortal/Products/getProduct
 const getProductDetails = require("../../Controller/CustomerPortal/Products/getProductDetails");
 const getAllProducts = require("../../Controller/CustomerPortal/Products/getAllProducts");
 const getSearchProducts = require("../../Controller/CustomerPortal/Products/getSearchProducts");
+const getCategoryProducts = require("../../Controller/CustomerPortal/Products/categoryWiseProducts");
 const router = express.Router();
 
 router.get("/:pageNumber", async (req, res) => {
@@ -19,6 +20,10 @@ router.get("/search/:searchQuery", async (req, res) => {
 
 router.get("/product_details/:productId", async (req, res) => {
   await getProductDetails(req, res);
+});
+
+router.get("/category/:category/:subCategory", async (req, res) => {
+  await getCategoryProducts(req, res);
 });
 
 module.exports = router;
