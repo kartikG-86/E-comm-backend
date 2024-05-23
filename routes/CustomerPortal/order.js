@@ -4,16 +4,10 @@ const newOrder = require("../../Controller/CustomerPortal/Order/newOrder");
 const getOrderDetails = require("../../Controller/CustomerPortal/Order/getOrderDetails");
 const router = express.Router();
 
-router.get("/orders/:userId", async (req, res) => {
-  await getOrders(req, res);
-});
+router.get("/orders/:userId", getOrders);
 
-router.post("/new_order", async (req, res) => {
-  await newOrder(req, res);
-});
+router.post("/new_order", newOrder);
 
-router.get("/order_details/:orderId", async (req, res) => {
-  await getOrderDetails(req, res);
-});
+router.get("/order_details/:orderId", getOrderDetails);
 
 module.exports = router;

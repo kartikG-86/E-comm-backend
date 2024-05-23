@@ -1,11 +1,11 @@
-const User = require("../../../models/CustomerPortal/User");
+const userModel = require("../../../models/CustomerPortal/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const secretKey = process.env.SECRET_KEY;
 
 const findUser = async (email) => {
-  const user = await User.findOne({ email: email });
+  const user = await userModel.findOne({ email: email });
   return user;
 };
 

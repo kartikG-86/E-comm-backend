@@ -34,7 +34,11 @@ const addNewProduct = async (
   gender,
   originalPrice,
   finalPrice,
-  admin_user
+  admin_user,
+  estimatedDelivery,
+  senderAddress,
+  senderCity,
+  senderCountry
 ) => {
   const newProduct = await Product.create({
     title: title,
@@ -45,6 +49,10 @@ const addNewProduct = async (
     finalPrice: finalPrice,
     brandName: admin_user.brandName,
     userId: admin_user.id,
+    estimatedDelivery: estimatedDelivery,
+    senderAddress: senderAddress,
+    senderCity: senderCity,
+    senderCountry: senderCountry,
   });
   return newProduct;
 };
@@ -63,6 +71,10 @@ const addProduct = async (req, res) => {
     originalPrice,
     finalPrice,
     userEmail,
+    estimatedDelivery,
+    senderAddress,
+    senderCity,
+    senderCountry,
   } = req.body;
 
   const admin_user = await getAdminUser(userEmail);
@@ -88,7 +100,11 @@ const addProduct = async (req, res) => {
     gender,
     originalPrice,
     finalPrice,
-    admin_user
+    admin_user,
+    estimatedDelivery,
+    senderAddress,
+    senderCity,
+    senderCountry
   );
 
   const token = await getAuthToken(newProduct);

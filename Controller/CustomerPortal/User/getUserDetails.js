@@ -1,9 +1,9 @@
-const User = require("../../../models/CustomerPortal/User");
+const userModel = require("../../../models/CustomerPortal/User");
 
 const getUser = async (req, res) => {
   const userId = req.params.userId;
 
-  const user = await User.findOne({ _id: userId });
+  const user = await userModel.findOne({ _id: userId });
 
   return res.send({
     user: user,

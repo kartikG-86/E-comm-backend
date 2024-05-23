@@ -8,32 +8,22 @@ const add_more_user_details = require("../../Controller/CustomerPortal/User/User
 const deleteAddress = require("../../Controller/CustomerPortal/User/deleteUserAddress");
 
 // Sign UP
-router.post("/signUp", async (req, res) => {
-  await signUp(req, res);
-});
+router.post("/signUp", signUp);
 
 // Login
-router.post("/login", async (req, res) => {
-  await login(req, res);
-});
+router.post("/login", login);
 
 //forgotPassword
-router.post("/forgotPassword", async (req, res) => {
-  await forgotPassword(req, res);
-});
+router.post("/forgotPassword", forgotPassword);
 
-router.get("/user/:userId", async (req, res) => {
-  await getUser(req, res);
-});
+// get user from user Id
+router.get("/user/:userId", getUser);
 
-router.post("/add_user_details", async (req, res) => {
-  await add_more_user_details(req, res);
-});
+// add more details to user account
+router.post("/add_user_details", add_more_user_details);
 
 // delete user Address
 
-router.post("/delete_address", async (req, res) => {
-  await deleteAddress(req, res);
-});
+router.post("/delete_address", deleteAddress);
 
 module.exports = router;

@@ -5,18 +5,12 @@ const login = require("../../Controller/AdminPortal/AdminUser/adminLogin");
 const forgotPassword = require("../../Controller/AdminPortal/AdminUser/adminForgotPassword");
 
 // Sign UP
-router.post("/signUp", async (req, res) => {
-  await signUp(req, res);
-});
+router.post("/signUp", signUp);
 
 // Login
-router.post("/login", async (req, res) => {
-  await login(req, res);
-});
+router.post("/login", login);
 
 //forgotPassword
-router.post("/forgotPassword", async (req, res) => {
-  await forgotPassword(req, res);
-});
+router.post("/forgotPassword", forgotPassword);
 
 module.exports = router;

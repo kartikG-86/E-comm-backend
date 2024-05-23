@@ -6,24 +6,14 @@ const getSearchProducts = require("../../Controller/CustomerPortal/Products/getS
 const getCategoryProducts = require("../../Controller/CustomerPortal/Products/categoryWiseProducts");
 const router = express.Router();
 
-router.get("/:pageNumber", async (req, res) => {
-  await getProducts(req, res);
-});
+router.get("/:pageNumber", getProducts);
 
-router.get("/all/prodcuts", async (req, res) => {
-  await getAllProducts(req, res);
-});
+router.get("/all/prodcuts", getAllProducts);
 
-router.get("/search/:searchQuery", async (req, res) => {
-  await getSearchProducts(req, res);
-});
+router.get("/search/:searchQuery", getSearchProducts);
 
-router.get("/product_details/:productId", async (req, res) => {
-  await getProductDetails(req, res);
-});
+router.get("/product_details/:productId", getProductDetails);
 
-router.get("/category/:category/:subCategory", async (req, res) => {
-  await getCategoryProducts(req, res);
-});
+router.get("/category/:category/:subCategory", getCategoryProducts);
 
 module.exports = router;

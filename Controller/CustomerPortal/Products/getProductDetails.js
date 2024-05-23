@@ -1,9 +1,9 @@
-const Product = require("../../../models/Product");
+const productModel = require("../../../models/Product");
 
 const getProductDetails = async (req, res) => {
   const productId = req.params.productId;
 
-  const product = await Product.findOne({ _id: productId });
+  const product = await productModel.findOne({ _id: productId });
   if (!product) {
     return res.send({
       message: "Product doesn't exist",

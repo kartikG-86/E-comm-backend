@@ -1,11 +1,11 @@
 const bcrypt = require("bcryptjs");
-const User = require("../../../models/CustomerPortal/User");
+const userModel = require("../../../models/CustomerPortal/User");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const secretKey = process.env.SECRET_KEY;
 
 const findUser = async (email) => {
-  const user = await User.findOne({ email: email });
+  const user = await userModel.findOne({ email: email });
   return user;
 };
 
@@ -23,7 +23,7 @@ const getAuthToken = async (user) => {
 const createNewUser = async (userName, email, password) => {
   const salt = await bcrypt.genSalt(10);
   const secPass = await bcrypt.hash(password, salt);
-  const newUser = await User.create({
+  const newUser = await userModel.create({
     userName: userName,
     email: email,
     password: secPass,

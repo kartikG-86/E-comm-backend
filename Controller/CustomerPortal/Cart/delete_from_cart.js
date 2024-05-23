@@ -1,4 +1,4 @@
-const Cart = require("../../../models/CustomerPortal/Cart");
+const cartModel = require("../../../models/CustomerPortal/Cart");
 var jwt = require("jsonwebtoken");
 
 const Secret_Key = process.env.SECRET_KEY;
@@ -14,7 +14,7 @@ const getAuthToken = async (cartItem) => {
 };
 
 const findItem = async (cartId) => {
-  const item = await Cart.findOne({ _id: cartId });
+  const item = await cartModel.findOne({ _id: cartId });
   return item;
 };
 
@@ -30,7 +30,7 @@ const deleteItem = async (req, res) => {
     });
   }
 
-  item = await Cart.deleteOne({ _id: cartId });
+  item = await cartModel.deleteOne({ _id: cartId });
 
   const token = await getAuthToken(item);
   return res.send({

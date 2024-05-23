@@ -1,7 +1,7 @@
-const Cart = require("../../../models/CustomerPortal/Cart");
+const cartModel = require("../../../models/CustomerPortal/Cart");
 
 const findItem = async (productId) => {
-  const item = await Cart.findOne({ productId: productId });
+  const item = await cartModel.findOne({ productId: productId });
   return item;
 };
 
@@ -16,7 +16,7 @@ const increaseQuantity = async (req, res) => {
       message: "Item not present",
     });
   } else {
-    item = await Cart.updateOne(
+    item = await cartModel.updateOne(
       { productId: productId },
       { $set: { quantity: quantity } }
     );

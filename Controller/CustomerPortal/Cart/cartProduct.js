@@ -1,15 +1,15 @@
-const Cart = require("../../../models/CustomerPortal/Cart");
-const Product = require("../../../models/Product");
+const cartModel = require("../../../models/CustomerPortal/Cart");
+const productModel = require("../../../models/Product");
 
 const findCartProducts = async (userId) => {
-  const cartItems = await Cart.find({ userId: userId });
+  const cartItems = await cartModel.find({ userId: userId });
   const cartProducts = [];
 
   if (cartItems.length > 0) {
     // Use Promise.all to wait for all async operations to complete
     await Promise.all(
       cartItems.map(async (item) => {
-        const getProduct = await Product.findById(item.productId); // Assuming Product.findById() is correct
+        const getProduct = await productModel.findById(item.productId); // Assuming Product.findById() is correct
         if (getProduct) {
           let cartProduct = { ...getProduct.toObject() };
           cartProduct.quantity = item.quantity;

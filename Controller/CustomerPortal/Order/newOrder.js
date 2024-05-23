@@ -1,20 +1,20 @@
-const Order = require("../../../models/CustomerPortal/Order");
-const Cart = require("../../../models/CustomerPortal/Cart");
-const Product = require("../../../models/Product");
-const User = require("../../../models/CustomerPortal/User");
+const orderModel = require("../../../models/CustomerPortal/Order");
+const productModel = require("../../../models/Product");
+const userModel = require("../../../models/CustomerPortal/User");
+
 const findProduct = async (productId) => {
-  const product = await Product.findOne({ _id: productId });
+  const product = await productModel.findOne({ _id: productId });
   return product;
 };
 const findUser = async (userId) => {
-  const user = await User.findOne({ _id: userId });
+  const user = await userModel.findOne({ _id: userId });
   return user;
 };
 const newOrder = async (req, res) => {
   const { orders, address } = req.body;
   let userId = "";
 
-  let database_orders = await Order.find();
+  let database_orders = await orderModel.find();
   let orderId = database_orders.length;
   // placed Orders
   orders.map(async (item) => {
@@ -22,7 +22,7 @@ const newOrder = async (req, res) => {
     const user = await findUser(userId);
     const product = await findProduct(item.productId);
     orderId = orderId + 1;
-    const new_order = await Order.create({
+    const new_order = await orderModel.create({
       productId: item.productId,
       placedUserId: item.placedUserId,
       quantity: item.quantity,

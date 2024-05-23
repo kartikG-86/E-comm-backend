@@ -5,8 +5,6 @@ const router = express.Router();
 
 // add user details
 
-router.post("/add_user_details", async (req, res) => {
-  await add_more_user_details(req, res);
-});
+router.post("/add_user_details", add_more_user_details);
 
 module.exports = router;

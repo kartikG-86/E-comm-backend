@@ -1,9 +1,9 @@
-const User = require("../../../models/CustomerPortal/User");
+const userModel = require("../../../models/CustomerPortal/User");
 
 const deleteAddress = async (req, res) => {
   const { addressDetails, userId } = req.body;
 
-  await User.updateOne(
+  await userModel.updateOne(
     { _id: userId },
     { $pull: { addresses: { address: addressDetails.address } } }
   );

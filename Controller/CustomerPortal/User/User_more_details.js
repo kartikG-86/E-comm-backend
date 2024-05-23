@@ -1,9 +1,5 @@
-const User = require("../../../models/CustomerPortal/User");
+const userModel = require("../../../models/CustomerPortal/User");
 
-const findUser = async (userId) => {
-  const user = await User.findOne({ _id: userId });
-  return user;
-};
 const add_more_user_details = async (req, res) => {
   const {
     firstName,
@@ -18,7 +14,6 @@ const add_more_user_details = async (req, res) => {
     userId,
   } = req.body;
 
-  const user = await findUser(userId);
   const addressDetails = {
     address: address,
     name: firstName + " " + lastName,
@@ -33,28 +28,14 @@ const add_more_user_details = async (req, res) => {
     address: address,
     phoneNumber: phoneNumber,
   };
-
-  // const userUpdate = await User.updateMany(
-  //   {
-  //     _id: userId,
-  //   },
-  //   {
-  //     $set: {
-  //       firstName: firstName,
-  //       lastName: lastName,
-  //       country: country,
-  //       phoneCode: phoneCode,
-  //       city: city,
-  //       state: state,
-  //       pinCode: pinCode,
-  //       address:address,
-  //       phoneNumber: phoneNumber,
-  //     },
-  //   }
-  // );
-
-  user.addresses.push(addressDetails);
-  user.save();
+  await userModel.updateOne(
+    {
+      _id: userId,
+    },
+    {
+      $push: { addresses: addressDetails },
+    }
+  );
 
   return res.send({
     success: true,

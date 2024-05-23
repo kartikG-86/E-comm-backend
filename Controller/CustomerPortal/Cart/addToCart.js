@@ -1,4 +1,4 @@
-const Cart = require("../../../models/CustomerPortal/Cart");
+const cartModel = require("../../../models/CustomerPortal/Cart");
 var jwt = require("jsonwebtoken");
 require("dotenv").config();
 const Secret_Key = process.env.SECRET_KEY;
@@ -14,7 +14,7 @@ const getAuthToken = async (cartItem) => {
 };
 
 const findProduct = async (productId, userId) => {
-  const cartProduct = await Cart.findOne({
+  const cartProduct = await cartModel.findOne({
     productId: productId,
     userId: userId,
   });
@@ -27,7 +27,7 @@ const addToCart = async (req, res) => {
   var cartProduct = await findProduct(productId, userId);
 
   if (cartProduct) {
-    cartProduct = await Cart.updateOne(
+    cartProduct = await cartModel.updateOne(
       { _id: cartProduct.id },
       { $set: { quantity: cartProduct.quantity + Number(quantity) } }
     );
@@ -38,7 +38,7 @@ const addToCart = async (req, res) => {
     });
   }
 
-  const cartItem = await Cart.create({
+  const cartItem = await cartModel.create({
     productId: productId,
     userId: userId,
     quantity: Number(quantity),

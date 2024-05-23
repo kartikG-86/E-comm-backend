@@ -1,11 +1,11 @@
-const User = require("../../../models/CustomerPortal/User");
+const userModel = require("../../../models/CustomerPortal/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const secretKey = process.env.SECRET_KEY;
 
 const findUser = async (email) => {
-  const user = await User.findOne({ email: email });
+  const user = await userModel.findOne({ email: email });
   return user;
 };
 
@@ -68,7 +68,7 @@ const forgotPassword = async (req, res) => {
   // Update Password
   const hashedPassword = await hashPassword(newPassword);
   const id = user.id;
-  user = await User.updateOne(
+  user = await userModel.updateOne(
     { email: email },
     { $set: { password: hashedPassword } }
   );

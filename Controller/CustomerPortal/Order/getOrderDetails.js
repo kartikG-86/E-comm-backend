@@ -1,14 +1,9 @@
-const Order = require("../../../models/CustomerPortal/Order");
-const Product = require("../../../models/Product");
+const orderModel = require("../../../models/CustomerPortal/Order");
+const productModel = require("../../../models/Product");
 
 const findOrder = async (orderId) => {
-  const order = await Order.findOne({ _id: orderId });
+  const order = await orderModel.findOne({ _id: orderId });
   return order;
-};
-
-const findProduct = async (productId) => {
-  const product = await Product.findOne({ _id: productId });
-  return product;
 };
 
 const getOrderDetails = async (req, res) => {
@@ -17,6 +12,8 @@ const getOrderDetails = async (req, res) => {
 
   return res.send({
     orderDetails: order,
+    success: true,
+    message: "Here are your orders",
   });
 };
 
